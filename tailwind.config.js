@@ -20,6 +20,9 @@ module.exports = {
         "in-progress-amber": "#F59E0B",
         "closed-gray": "#6B7280",
       },
+      fontFamily: {
+        sans: ["Bricolage Grotesque", "sans-serif"], // ✅ Add fallback
+      },
     },
   },
   plugins: [],

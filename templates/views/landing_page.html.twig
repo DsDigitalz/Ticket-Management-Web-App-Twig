@@ -46,7 +46,7 @@
         {{ macros.decorative_circle('150px', 'auto', 'auto', '10%', '35%', 'bg-[#A855F7]', 'opacity-15', 1) }}
 
         {# <header> semantic tag for hero content - Replaces motion.header #}
-        <header role="banner" class="mb-12 flex px-4 flex-col justify-center items-center relative z-10">
+        <header role="banner" class="mb-20 mt-40 flex px-4 flex-col justify-center items-center relative z-10">
             <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold text-[#F8FAFC] mb-4 opacity-90">
                 Ticketrax
             </h1>
@@ -82,37 +82,7 @@
         {# Decorative Circle 3 (Features) - Using Twig Macro #}
         {{ macros.decorative_circle('150px', '20%', 'auto', '45%', 'auto', 'bg-[#10B981]', 'opacity-10', 0) }}
 
-        {# --- Feature Boxes (Replicated structure for consistency) --- #}
-        
-        {# Feature 1: Unified Design #}
-        {# NOTE: The Framer Motion scroll effect is represented by semantic <article> markup 
-            and the Tailwind shadow/border styles, but the animation itself is omitted. #}
-        <article class="bg-[#1E293B] p-6 rounded-xl shadow-xl border border-[#334155] shadow-black/30 h-full">
-            <span class="text-3xl text-[#3B82F6] mb-4 block">
-                {# Placeholder for the Lucide icon, or use a Unicode character #}
-                <i data-lucide="layout-dashboard" aria-hidden="true"></i> 
-            </span>
-            <h3 class="text-xl font-bold text-[#F8FAFC] mb-2">Unified Design</h3>
-            <p class="text-[#94A3B8]">A consistent look across all frameworks (React, Vue, Twig).</p>
-        </article>
-
-        {# Feature 2: Secure Workflow #}
-        <article class="bg-[#1E293B] p-6 rounded-xl shadow-xl border border-[#334155] shadow-black/30 h-full">
-            <span class="text-3xl text-[#3B82F6] mb-4 block">
-                <i data-lucide="shield" aria-hidden="true"></i>
-            </span>
-            <h3 class="text-xl font-bold text-[#F8FAFC] mb-2">Secure Workflow</h3>
-            <p class="text-[#94A3B8]">Protected routes and session management with local storage.</p>
-        </article>
-
-        {# Feature 3: Full CRUD #}
-        <article class="bg-[#1E293B] p-6 rounded-xl shadow-xl border border-[#334155] shadow-black/30 h-full">
-            <span class="text-3xl text-[#3B82F6] mb-4 block">
-                <i data-lucide="database" aria-hidden="true"></i>
-            </span>
-            <h3 class="text-xl font-bold text-[#F8FAFC] mb-2">Full CRUD</h3>
-            <p class="text-[#94A3B8]">Create, Read, Update, and Delete tickets with real-time validation.</p>
-        </article>
+      
         
     </section>
 {% endblock %}
