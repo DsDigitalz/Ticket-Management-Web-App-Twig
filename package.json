@@ -1,18 +1,21 @@
 {
   "name": "ticket-management-app-twig",
   "version": "1.0.0",
+  "description": "Minimal PHP/Twig implementation of the Ticket Management App.",
   "main": "index.js",
+  
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-   
+    
+    "dev": "npx tailwindcss -i ./assets/css/styles.css -o ./public/css/styles.css --watch"
   },
-  "keywords": [],
+  
+  "keywords": ["twig", "php", "tailwind"],
   "author": "",
   "license": "ISC",
-  "description": "",
+  
   "devDependencies": {
-    "autoprefixer": "^10.4.21",
-    "postcss": "^8.5.6",
-    "tailwindcss": "^4.1.16"
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.3"
   }
 }

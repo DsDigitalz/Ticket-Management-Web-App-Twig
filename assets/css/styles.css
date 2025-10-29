@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom CSS classes for the project can be added below this line */
+.decorative-circle {
+  @apply absolute rounded-full opacity-30 blur-3xl;
+  width: 300px;
+  height: 300px;
+}
