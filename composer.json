@@ -1,0 +1,15 @@
+{
+    "name": "user/ticket-management-app-twig",
+    "autoload": {
+        "psr-4": {
+            "User\\TicketManagementAppTwig\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Daniel Sanu",
+            "email": "sanudaniel46@gmail.com"
+        }
+    ],
+    "require": {}
+}
