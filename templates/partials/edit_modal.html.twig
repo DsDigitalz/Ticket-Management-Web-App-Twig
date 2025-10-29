@@ -1,0 +1,67 @@
+<div id="edit-ticket-modal" class="modal-overlay fixed inset-0 z-50 hidden 
+                                bg-black bg-opacity-70 flex justify-center items-center p-4">
+    
+    <section role="dialog" aria-labelledby="edit-ticket-title" 
+             class="bg-card-bg rounded-xl shadow-2xl w-full max-w-lg" 
+             aria-modal="true">
+        
+        <header class="p-5 border-b border-[#334155] flex justify-between items-center">
+            <h2 id="edit-ticket-title" class="text-xl font-bold text-gray-100">Edit Ticket <span id="current-edit-id">#1</span></h2>
+            <button class="close-modal-btn text-gray-400 hover:text-white" aria-label="Close modal">
+                &times;
+            </button>
+        </header>
+
+        <form action="/tickets/update" method="POST" class="p-5 space-y-4">
+            <input type="hidden" name="id" id="edit-id-input" value="1">
+            
+            {# Title Field (Mandatory) #}
+            <div class="space-y-1">
+                <label for="edit-title" class="block text-sm font-medium text-gray-300">Title <span class="text-red-500">*</span></label>
+                <input type="text" id="edit-title" name="title" required
+                       placeholder="Enter ticket title (mandatory)"
+                       class="w-full p-2.5 bg-[#0F172A] border border-[#334155] rounded-lg text-white"
+                       value="Default Title Value">
+            </div>
+
+            {# Description Field #}
+            <div class="space-y-1">
+                <label for="edit-description" class="block text-sm font-medium text-gray-300">Description</label>
+                <textarea id="edit-description" name="description" maxlength="500" 
+                          placeholder="Detailed description (max 500 chars)"
+                          class="w-full p-2.5 bg-[#0F172A] border border-[#334155] rounded-lg text-white h-24">Default description content</textarea>
+            </div>
+
+            {# Status and Priority #}
+            <div class="grid grid-cols-2 gap-4">
+                <div class="space-y-1">
+                    <label for="edit-status" class="block text-sm font-medium text-gray-300">Status <span class="text-red-500">*</span></label>
+                    <select id="edit-status" name="status" required
+                            class="w-full p-2.5 bg-[#0F172A] border border-[#334155] rounded-lg text-white">
+                        {# 🎯 Status Field Must Strictly Accept These Values #}
+                        <option value="open">Open</option>
+                        <option value="in_progress" selected>In Progress</option>
+                        <option value="closed">Closed</option>
+                    </select>
+                </div>
+                <div class="space-y-1">
+                    <label for="edit-priority" class="block text-sm font-medium text-gray-300">Priority</label>
+                    <select id="edit-priority" name="priority"
+                            class="w-full p-2.5 bg-[#0F172A] border border-[#334155] rounded-lg text-white">
+                        <option value="high">High</option>
+                        <option value="medium">Medium</option>
+                        <option value="low" selected>Low</option>
+                    </select>
+                </div>
+            </div>
+
+            {# Submit Button #}
+            <div class="pt-2">
+                <button type="submit" 
+                        class="w-full bg-success-green hover:bg-green-600 text-white font-medium py-2.5 rounded-lg transition-colors">
+                    Save Changes
+                </button>
+            </div>
+        </form>
+    </section>
+</div>

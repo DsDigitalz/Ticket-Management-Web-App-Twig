@@ -1,0 +1,54 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block content %}
+    <main role="main" class="relative overflow-hidden pt-20">
+        
+        {# 🎯 Decorative Circle 1 (overlaps hero section) #}
+        <div class="decorative-circle top-10 right-40 bg-blue-600/50"></div>
+        {# 🎯 Decorative Circle 2 #}
+        <div class="decorative-circle bottom-0 left-10 bg-green-500/50 hidden md:block"></div>
+
+        {# Hero Section #}
+        <section class="relative text-center pb-24 px-4 sm:px-6">
+            <h1 class="text-6xl font-extrabold text-primary-blue mb-4">Ticketrax</h1>
+            <p class="mt-4 text-xl text-gray-300 max-w-2xl mx-auto">
+                The modern, responsive solution for effortless task and ticket management. Build beautiful UIs, faster.
+            </p>
+            
+            <div class="mt-10 space-x-4">
+                <a href="/auth/login" class="bg-primary-blue hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-colors shadow-lg">
+                    Login
+                </a>
+                <a href="/auth/register" class="bg-success-green hover:bg-green-600 text-white font-medium py-3 px-6 rounded-lg transition-colors shadow-lg">
+                    Get Started
+                </a>
+            </div>
+            
+            {# 🎯 Wavy Background SVG (Minimal implementation for concept) #}
+            <div class="absolute bottom-0 left-0 w-full z-10">
+                <svg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="#1E293B" fill-opacity="1" d="M0,160L48,165.3C96,171,192,181,288,176C384,171,480,155,576,149.3C672,144,768,149,864,165.3C960,181,1056,203,1152,208C1248,213,1344,203,1392,197.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+                </svg>
+            </div>
+        </section>
+
+        {# Features Section (Uses card-like boxes) #}
+        <section class="py-16 bg-card-bg/50 px-4">
+            <h2 class="text-center text-4xl font-bold text-gray-100 mb-12">Core Features</h2>
+            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div class="bg-card-bg p-6 rounded-xl shadow-xl space-y-3">
+                    <h3 class="text-2xl font-semibold text-primary-blue">Seamless UI</h3>
+                    <p class="text-gray-400">Consistent, responsive design across all platforms and screens.</p>
+                </div>
+                <div class="bg-card-bg p-6 rounded-xl shadow-xl space-y-3">
+                    <h3 class="text-2xl font-semibold text-primary-blue">Protected Routes</h3>
+                    <p class="text-gray-400">Dashboard and management views secured by session token.</p>
+                </div>
+                <div class="bg-card-bg p-6 rounded-xl shadow-xl space-y-3">
+                    <h3 class="text-2xl font-semibold text-primary-blue">Full CRUD</h3>
+                    <p class="text-gray-400">Complete Create, Read, Update, Delete functionality for tickets.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}

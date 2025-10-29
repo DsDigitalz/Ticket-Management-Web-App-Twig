@@ -11,5 +11,7 @@
             "email": "sanudaniel46@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "twig/twig": "^3.21"
+    }
 }

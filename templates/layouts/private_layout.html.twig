@@ -1,0 +1,14 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block layout_content %}
+    <div class="flex h-screen overflow-hidden">
+        
+        {# 1. Sidebar Nav (The fixed left column) #}
+        {% include 'partials/sidebar_nav.html.twig' %}
+        
+        {# 2. Main Content Area (The scrollable right column) #}
+        <div role="main" class="flex-1 overflow-y-auto p-8 lg:ml-64">
+            {% block main_content %}{% endblock %}
+        </div>
+    </div>
+{% endblock %}

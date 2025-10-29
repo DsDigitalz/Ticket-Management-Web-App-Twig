@@ -1,0 +1,40 @@
+{% set status_colors = {
+    'open': 'bg-success-green',
+    'closed': 'bg-closed-gray',
+    'in_progress': 'bg-in-progress-amber',
+} %}
+
+<article id="ticket-{{ ticket.id }}" 
+         role="listitem" 
+         class="bg-card-bg p-4 rounded-xl shadow-lg flex flex-col space-y-3 
+                transform transition duration-300 ease-in-out hover:shadow-2xl">
+
+    <header class="flex justify-between items-start">
+        <h3 class="text-xl font-semibold text-gray-100">{{ ticket.title }}</h3>
+        {# Status Tag Implementation (Color & Status Rules) #}
+        <span class="text-xs font-semibold px-2 py-0.5 rounded-full capitalize 
+                     {{ status_colors[ticket.status] | default('bg-red-700') }} text-white">
+            {{ ticket.status|replace({'_': ' '}) }}
+        </span>
+    </header>
+
+    <p class="text-sm text-gray-400 flex-grow">
+        {{ ticket.description|length > 0 ? ticket.description : 'No description provided.' }}
+    </p>
+
+    <footer class="flex justify-end space-x-2 border-t border-[#334155] pt-3">
+        {# Edit Button #}
+        <button data-modal-target="edit-ticket-modal" data-ticket-id="{{ ticket.id }}" 
+                class="edit-btn text-blue-400 hover:text-blue-500 transition-colors" 
+                aria-label="Edit Ticket {{ ticket.id }}">
+            <span role="img" aria-hidden="true">✏️</span>
+        </button>
+
+        {# Delete Button #}
+        <button data-modal-target="delete-confirm-modal" data-ticket-id="{{ ticket.id }}" 
+                class="delete-btn text-red-400 hover:text-red-500 transition-colors" 
+                aria-label="Delete Ticket {{ ticket.id }}">
+            <span role="img" aria-hidden="true">🗑️</span>
+        </button>
+    </footer>
+</article>

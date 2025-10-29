@@ -1,0 +1,85 @@
+{% extends 'layouts/private_layout.html.twig' %}
+
+{% block main_content %}
+    <header class="flex justify-between items-center mb-8">
+        <h1 class="text-3xl font-bold text-gray-100">Ticket Management</h1>
+        
+        {# Button to open the Create Modal #}
+        <button data-modal-target="create-new-modal" 
+                class="open-modal-btn bg-primary-blue hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg flex items-center transition-colors">
+            <span class="mr-2">+</span> New Ticket
+        </button>
+    </header>
+
+    {# 🎯 Read: Display a list of existing tickets using card-style boxes #}
+    <section role="list" aria-label="Active Tickets" 
+             class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        {% for ticket in tickets %}
+            {# Includes the component for a single card with status tags #}
+            {{ include('partials/ticket_card.html.twig', { 'ticket': ticket }) }}
+        {% endfor %}
+        
+    </section>
+
+    {# Include the CRUD Modals #}
+    {% include 'partials/create_modal.html.twig' %}
+    {% include 'partials/edit_modal.html.twig' %}
+    {% include 'partials/delete_confirm_modal.html.twig' %}
+{% endblock %}
+
+{% block javascripts %}
+    {# Vanilla JS for Modal Handling and Interactivity #}
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const openBtns = document.querySelectorAll('.open-modal-btn, .edit-btn, .delete-btn');
+            const modals = document.querySelectorAll('.modal-overlay');
+
+            const closeModal = () => {
+                modals.forEach(modal => modal.classList.add('hidden'));
+            };
+
+            openBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const targetId = btn.dataset.modalTarget;
+                    const modal = document.getElementById(targetId);
+
+                    if (modal) {
+                        closeModal();
+                        
+                        // Simple logic to pass ticket ID to the delete modal for display
+                        if (btn.dataset.ticketId && targetId === 'delete-confirm-modal') {
+                            // Update display text
+                            modal.querySelector('#delete-ticket-id').textContent = '#' + btn.dataset.ticketId;
+                            // Update form input (for actual PHP submission)
+                            modal.querySelector('#delete-id-input').value = btn.dataset.ticketId;
+                        }
+                        
+                        modal.classList.remove('hidden');
+                    }
+                });
+            });
+
+            modals.forEach(modal => {
+                // Close listeners for buttons inside the modal
+                modal.querySelector('.close-modal-btn')?.addEventListener('click', closeModal);
+                modal.querySelector('.cancel-modal-btn')?.addEventListener('click', closeModal);
+
+                // Close listener for clicking outside the modal content
+                modal.addEventListener('click', (e) => {
+                    if (e.target.classList.contains('modal-overlay')) {
+                        closeModal();
+                    }
+                });
+            });
+
+            // Close listener for Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    closeModal();
+                }
+            });
+        });
+    </script>
+{% endblock %}
+\

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-app-bg text-[#F8FAFC]">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page_name | default('Ticketrax') }}</title>
+    
+    <link rel="stylesheet" href="/public/build/app.css"> 
+</head>
+<body class="min-h-screen">
+    {# 🎯 Max Width: Content must be centered with a max-width: 1440px #}
+    <div class="max-w-[1440px] mx-auto min-h-screen">
+        
+        {% block content %}{% endblock %}
+
+        {# 🎯 MODIFICATION: Add 'ignore missing' to prevent the fatal error #}
+        {% include 'partials/footer.html.twig' ignore missing %} 
+    </div>
+    
+    {% block javascripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,59 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block content %}
+    <main role="main" class="flex justify-center items-center min-h-screen p-4">
+        
+        <div class="bg-card-bg p-8 rounded-xl shadow-2xl w-full max-w-sm">
+            
+            <h1 class="text-3xl font-bold text-gray-100 mb-6 text-center">
+                {{ form_type == 'login' ? 'Login to Ticketrax' : 'Create New Account' }}
+            </h1>
+
+            <form action="/auth/login" method="POST" class="space-y-4">
+                {# Error Toast/Snackbar Notification (Flawless Error Handling) #}
+                {% if error %}
+                    <div role="alert" class="bg-red-900/40 border border-red-700 p-3 rounded-lg text-sm text-red-300">
+                        {{ error }}
+                    </div>
+                {% endif %}
+
+                {# Email Field #}
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-300">Email</label>
+                    <input type="email" id="email" name="email" required
+                           class="w-full p-2.5 bg-[#0F172A] border border-[#334155] rounded-lg text-white"
+                           value="{{ form_type == 'login' ? 'test@user.com' : '' }}"
+                           placeholder="Enter your email">
+                    {# Inline validation example (Client-side validation required via JS) #}
+                </div>
+                
+                {# Password Field #}
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-300">Password</label>
+                    <input type="password" id="password" name="password" required
+                           class="w-full p-2.5 bg-[#0F172A] border border-[#334155] rounded-lg text-white"
+                           value="{{ form_type == 'login' ? 'password' : '' }}"
+                           placeholder="Enter your password">
+                </div>
+                
+                {# Register Specific Fields #}
+                {% if form_type == 'register' %}
+                {# Add Name/Confirm Password Fields Here #}
+                {% endif %}
+
+                <button type="submit" class="w-full bg-primary-blue hover:bg-blue-700 text-white font-medium py-2.5 rounded-lg transition-colors mt-4">
+                    {{ form_type == 'login' ? 'Log In' : 'Sign Up' }}
+                </button>
+            </form>
+
+            <p class="text-center text-sm text-gray-400 mt-4">
+                {% if form_type == 'login' %}
+                    Don't have an account? <a href="/auth/register" class="text-primary-blue hover:text-blue-300">Register</a>
+                {% else %}
+                    Already have an account? <a href="/auth/login" class="text-primary-blue hover:text-blue-300">Login</a>
+                {% endif %}
+            </p>
+            
+        </div>
+    </main>
+{% endblock %}
