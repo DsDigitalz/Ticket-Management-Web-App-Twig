@@ -30,7 +30,8 @@ RUN chown -R www-data:www-data /var/www/html \
  && chmod -R 755 /var/www/html
 
 # Expose port
-EXPOSE 80
+EXPOSE 3000
 
 # Start php-fpm and nginx when container starts
-CMD ["sh", "-c", "php-fpm -D && nginx -g 'daemon off;'"]
+CMD php -S 0.0.0.0:$PORT -t public
+
