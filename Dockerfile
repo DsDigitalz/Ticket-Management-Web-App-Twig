@@ -1,37 +1,35 @@
-# Use an official PHP FPM image
-FROM php:8.2-fpm
+# -----------------------------
+# 1️⃣ Base image: PHP with Composer
+# -----------------------------
+FROM php:8.2-cli
 
-# Install system deps and extensions commonly used
-RUN apt-get update && apt-get install -y \
-    nginx \
-    git \
-    unzip \
-    libzip-dev \
-    zip \
- && docker-php-ext-install pdo pdo_mysql zip
+# Install dependencies (like unzip for Composer)
+RUN apt-get update && apt-get install -y git unzip && apt-get clean
 
-# Install composer
-COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+# -----------------------------
+# 2️⃣ Set working directory
+# -----------------------------
+WORKDIR /app
 
-# Create web root
-WORKDIR /var/www/html
+# -----------------------------
+# 3️⃣ Copy Composer and install PHP dependencies
+# -----------------------------
+COPY composer.json composer.lock* ./
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
+    && php composer-setup.php --install-dir=/usr/local/bin --filename=composer \
+    && composer install --no-dev --optimize-autoloader || true
 
-# Copy app
-COPY . /var/www/html
+# -----------------------------
+# 4️⃣ Copy the rest of your project
+# -----------------------------
+COPY . .
 
-# Install PHP dependencies
-RUN composer install --no-dev --optimize-autoloader --no-interaction || true
+# -----------------------------
+# 5️⃣ Expose the correct port (Render and Railway use $PORT)
+# -----------------------------
+EXPOSE 8000
 
-# Copy nginx config
-COPY docker/nginx.conf /etc/nginx/sites-available/default
-
-# Ensure permissions
-RUN chown -R www-data:www-data /var/www/html \
- && chmod -R 755 /var/www/html
-
-# Expose port
-EXPOSE 3000
-
-# Start php-fpm and nginx when container starts
-CMD php -S 0.0.0.0:$PORT -t public
-
+# -----------------------------
+# 6️⃣ Start PHP server dynamically on assigned port
+# -----------------------------
+CMD php -S 0.0.0.0:${PORT:-8000} -t public
